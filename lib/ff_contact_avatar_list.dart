@@ -5,10 +5,10 @@ import 'ff_contact_avatar_model.dart';
 typedef void FFContactAvatarListSelected(int index);
 
 class FFContactAvatarList extends StatelessWidget {
-  final List<FFContactAvatarModel> models;
-  final Axis scrollDirection;
-  final FFContactAvatarTheme theme;
-  final FFContactAvatarListSelected onSelectAvatar;
+  final List<FFContactAvatarModel>? models;
+  final Axis? scrollDirection;
+  final FFContactAvatarTheme? theme;
+  final FFContactAvatarListSelected? onSelectAvatar;
 
   FFContactAvatarList({
     this.models,
@@ -20,7 +20,7 @@ class FFContactAvatarList extends StatelessWidget {
   static StatelessWidget fromModelList(
     List<FFContactAvatarModel> models, {
     Axis scrollDirection = Axis.horizontal,
-    FFContactAvatarListSelected onSelectAvatar,
+    FFContactAvatarListSelected? onSelectAvatar,
   }) {
     return FFContactAvatarList(
       models: models,
@@ -33,8 +33,8 @@ class FFContactAvatarList extends StatelessWidget {
   static StatelessWidget fromModelListWithBuilder(
     List<FFContactAvatarModel> models, {
     Axis scrollDirection = Axis.horizontal,
-    FFContactAvatarListSelected onSelectAvatar,
-    @required BuildContext context,
+    FFContactAvatarListSelected? onSelectAvatar,
+    required BuildContext context,
   }) {
     FFContactAvatarTheme theme = FFContactAvatarTheme.defaultTheme;
 
@@ -45,7 +45,7 @@ class FFContactAvatarList extends StatelessWidget {
         return models[index].asContactAvatar(
           FFContactAvatarTheme.defaultTheme,
           onTap: () {
-            onSelectAvatar(index);
+            onSelectAvatar!(index);
           },
         );
       },
@@ -57,15 +57,15 @@ class FFContactAvatarList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      scrollDirection: scrollDirection,
-      itemExtent: theme.itemExtent,
-      padding: theme.listPadding,
-      children: models.map((model) {
-        var index = models.indexOf(model);
+      scrollDirection: scrollDirection!,
+      itemExtent: theme!.itemExtent,
+      padding: theme!.listPadding,
+      children: models!.map((model) {
+        var index = models!.indexOf(model);
         return model.asContactAvatar(
-          theme,
+          theme!,
           onTap: () {
-            onSelectAvatar(index);
+            onSelectAvatar!(index);
           },
         );
       }).toList(),

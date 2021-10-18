@@ -9,16 +9,16 @@ class FFContactAvatarModel {
   final VoidCallback onTap;
 
   FFContactAvatarModel({
-    @required this.name,
-    this.message,
-    this.image,
+    required this.name,
+    required this.message,
+    required this.image,
     this.showBadge = false,
-    this.onTap,
+    required this.onTap,
   });
 
   FFContactAvatar asContactAvatar(
     FFContactAvatarTheme theme, {
-    VoidCallback onTap,
+    required VoidCallback onTap,
   }) {
     return (image == null)
         ? FFContactAvatar(
@@ -26,7 +26,7 @@ class FFContactAvatarModel {
             message: this.message,
             showBadge: this.showBadge,
             theme: theme,
-            onTap: onTap,
+            onTap: onTap, model: null,
           )
         : FFContactAvatar(
             name: this.name,
@@ -35,6 +35,7 @@ class FFContactAvatarModel {
             image: this.image,
             theme: theme,
             onTap: onTap,
+            model: null,
           );
   }
 }

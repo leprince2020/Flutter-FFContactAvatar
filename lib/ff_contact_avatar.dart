@@ -10,40 +10,38 @@ export 'package:ff_contact_avatar/ff_contact_avatar_list.dart';
 export 'package:ff_contact_avatar/ff-contact-avatar-theme.dart';
 export 'ff_contact_avatar_model.dart';
 
-// ignore: must_be_immutable
 class FFContactAvatar extends StatelessWidget {
-  Image image;
-  String name;
-  String message;
+  Image? image;
+  String? name;
+  String? message;
   bool showBadge;
-  final FFContactAvatarModel model;
-  final VoidCallback onTap;
-
-  FFContactAvatarTheme theme;
+  final FFContactAvatarModel? model;
+  final VoidCallback? onTap;
+  FFContactAvatarTheme? theme;
 
   FFContactAvatar({
-    FFContactAvatarTheme theme,
+    FFContactAvatarTheme? theme,
     this.model,
-    this.image,
-    this.name,
-    this.message,
+     this.image,
+     this.name,
+     this.message,
     this.showBadge = false,
-    this.onTap,
+     this.onTap,
   }) {
     this.theme = (theme == null) ? FFContactAvatarTheme.defaultTheme : theme;
 
     if (model != null) {
-      this.image = model.image;
-      this.name = model.name;
-      this.message = model.message;
-      this.showBadge = model.showBadge;
+      this.image = model!.image;
+      this.name = model!.name;
+      this.message = model!.message;
+      this.showBadge = model!.showBadge;
     }
   }
 
   static const double avatarRadius = 31;
 
   String _getInitials() {
-    var nameParts = name.split(" ").map((elem) {
+    var nameParts = name!.split(" ").map((elem) {
       return elem[0];
     });
 
@@ -58,7 +56,7 @@ class FFContactAvatar extends StatelessWidget {
   CircleAvatar _makeImageAvatar() {
     return CircleAvatar(
       radius: avatarRadius,
-      backgroundImage: this.image.image,
+      backgroundImage: this.image!.image,
     );
   }
 
@@ -67,10 +65,10 @@ class FFContactAvatar extends StatelessWidget {
       radius: avatarRadius,
       child: Text(
         _getInitials(),
-        style: theme.initialsTextStyle,
+        style: theme!.initialsTextStyle,
       ),
-      backgroundColor: theme.backgroundColor,
-      foregroundColor: theme.foregroundColor,
+      backgroundColor: theme!.backgroundColor,
+      foregroundColor: theme!.foregroundColor,
     );
   }
 
@@ -78,12 +76,12 @@ class FFContactAvatar extends StatelessWidget {
     CircleAvatar ca =
         (image != null) ? _makeImageAvatar() : _makeInitialsAvatar();
 
-    Color badgeColor = showBadge ? theme.badgeColor : Colors.transparent;
+    Color badgeColor = showBadge ? theme!.badgeColor : Colors.transparent;
 
     return GestureDetector(
       onTap: this.onTap,
       child: Material(
-        elevation: theme.avatarElevation,
+        elevation: theme!.avatarElevation,
         borderRadius: BorderRadius.circular(avatarRadius),
         child: Stack(
           children: <Widget>[
@@ -108,7 +106,7 @@ class FFContactAvatar extends StatelessWidget {
 
   SizedBox _makePadding() {
     return SizedBox(
-      height: theme.verticalPadding,
+      height: theme!.verticalPadding,
     );
   }
 
@@ -119,13 +117,13 @@ class FFContactAvatar extends StatelessWidget {
         _makeCircleAvatar(),
         _makePadding(),
         Text(
-          name,
-          style: theme.nameTextStyle,
+          name!,
+          style: theme!.nameTextStyle,
         ),
         _makePadding(),
         Text(
-          message,
-          style: theme.messageTextStyle,
+          message!,
+          style: theme!.messageTextStyle,
         ),
       ],
     );
